@@ -3,7 +3,7 @@ title: "레슨 0 - 필수 조건"
 description: "Tailspin Toys 프로젝트에 필요한 Node.js를 설치하고 템플릿에서 리포지토리 복사본을 만들어 GitHub Copilot app 레슨을 준비합니다."
 authors:
   - geektrainer
-lastUpdated: 2026-06-30
+lastUpdated: 2026-10-22
 ---
 
 GitHub Copilot app은 Copilot과 GitHub를 모두 사용하는 중앙 허브 역할을 하는 데스크톱 앱입니다. 이 앱에서 이슈와 끌어오기 요청에 빠르게 접근하고 GitHub Copilot을 사용해 빌드할 수 있습니다. 이 워크숍에서는 Astro로 구축된 Tailspin Toys 앱과 GitHub Copilot app을 모두 로컬에서 사용합니다. 시작하기 전에 Node.js가 로컬에 설치되어 있는지 확인한 다음 Copilot app을 설치합니다.
@@ -24,9 +24,10 @@ GitHub Copilot app은 Copilot과 GitHub를 모두 사용하는 중앙 허브 역
 
     ```shell
     node --version
+    npm --version
     ```
 
-3. 프로젝트의 README와 `package.json`에 명시된 요구 사항을 충족하면 다음 섹션으로 건너뛸 수 있습니다.
+3. 두 명령이 모두 성공하고 Node.js 버전이 프로젝트의 README와 `package.json`에 명시된 요구 사항을 충족하면 다음 섹션으로 건너뛸 수 있습니다.
 
 > [!TIP]
 > Node가 설치되어 있지 않거나 업데이트해야 하는 경우에만 다음 단계를 수행하면 됩니다.
@@ -39,12 +40,16 @@ GitHub Copilot app은 Copilot과 GitHub를 모두 사용하는 중앙 허브 역
 
     ```bash
     node --version
+    npm --version
     ```
 
-9. 설치한 버전이 표시되는지 확인합니다.
+9. 설치한 Node.js와 npm 버전이 표시되는지 확인합니다.
 
 > [!IMPORTANT]
-> 각 워크트리에는 프로젝트 의존성과 E2E 검사용 Playwright Chromium도 필요합니다. 워크트리를 준비할 때 학습용 리포지토리의 README를 따르고, 설치 요청을 검토한 후 승인합니다.
+> Copilot app의 에이전트도 `node --version`과 `npm --version`을 실행할 수 있어야 합니다. 평소 사용하는 터미널에서 명령이 성공해도 앱에서 사용할 수 있다는 보장은 없습니다. Node.js를 설치하거나 PATH를 변경한 후에는 앱을 완전히 종료하고 다시 엽니다. 세션에서 명령이 계속 실패하면 계속하기 전에 [세션 환경 문제 해결 단계][session-environment]를 따릅니다.
+
+> [!IMPORTANT]
+> 각 워크트리에는 프로젝트 종속성과 E2E 검사에 필요한 Playwright Chromium도 설치해야 합니다. 워크트리를 준비할 때 Tailspin Toys 리포지토리의 README를 따르고, 설치 요청을 승인하기 전에 검토합니다.
 
 ## 실습 리포지토리 설정
 
@@ -86,3 +91,4 @@ Tailspin Toys 프로젝트의 복사본에서 작업합니다. 지금 [템플릿
 [node-download]: https://nodejs.org/en/download
 [template-repository]: https://docs.github.com/repositories/creating-and-managing-repositories/creating-a-template-repository
 [about-copilot-app]: https://docs.github.com/copilot/concepts/agents/github-copilot-app
+[session-environment]: ../3-agent-modes/#이슈에서-세션-시작

@@ -18,7 +18,7 @@ O workshop segue um fluxo contínuo da Tailspin Toys:
 6. Adicione o servidor do Model Context Protocol (MCP) do Playwright e use-o para explorar a filtragem em um navegador.
 7. Crie um agente personalizado de garantia de qualidade (QA) e use-o para revisar requisitos, cobertura e evidências de verificação.
 8. Revise toda a alteração de filtragem e use o Agent Merge no segundo PR.
-9. Use o canvas Database Explorer existente e, em seguida, crie e teste um canvas de triagem vinculado ao repositório.
+9. Verifique a disponibilidade de canvases, use o Database Explorer e crie e teste um canvas de triagem vinculado ao repositório. Se os recursos necessários não estiverem disponíveis, registre o impedimento e use a alternativa somente leitura ou continue para o resumo.
 
 Para manter o foco do workshop, você criará dois PRs: um para avaliações por estrelas e outro para filtragem, com as atualizações de instruções e da skill, o perfil de QA e os testes. Comece cada um a partir de `main` atualizado. O fluxo de filtragem e qualidade compartilha uma sessão, worktree e branch para que você possa aproveitar seu trabalho à medida que explora cada ferramenta. O exercício final de canvas permanece em sua própria sessão para que você se concentre na criação e no teste da superfície compartilhada sem repetir o fluxo de PR.
 
@@ -36,7 +36,7 @@ Para manter o foco do workshop, você criará dois PRs: um para avaliações por
 | [7. Criar e usar um agente de QA][ex7] | Requisitos e cobertura | Selecione um perfil especializado e reúna evidências de verificação final |
 | [8. Criar e integrar o PR do recurso][ex8] | Revisão e merge | Revise a filtragem, as instruções, a skill, o perfil de QA e os testes e use o Agent Merge no segundo PR |
 | [9. Explorar e criar canvases][ex9] | Colaboração | Use o Database Explorer e depois crie e teste um canvas de triagem vinculado ao repositório |
-| [10. Revisão e próximos passos][ex10] | Resumo | Revise o fluxo, os artefatos e outros recursos |
+| [10. Encerramento e próximos passos][ex10] | Resumo | Revise o fluxo, os artefatos e outros recursos |
 
 ## Pré-requisitos
 
@@ -50,10 +50,10 @@ Antes de participar deste workshop, verifique se você tem:
 > Não tem um plano pago? Estudantes verificados podem obter o GitHub Copilot gratuitamente por meio do [GitHub Education][callout-student-plan-education]. O plano **Copilot Student** inclui os recursos de agente, MCP, revisão de código e Copilot CLI usados neste workshop. Portanto, você pode concluir todos os percursos com esse plano.
 
 > [!NOTE]
-> Como o aplicativo Copilot é executado no seu computador, e não em um codespace, a [Lição 0][ex0] orienta você na instalação do Node.js e na criação da sua cópia do projeto antes da instalação do aplicativo.
+> Como o aplicativo Copilot é executado no seu computador, e não em um codespace, a [Lição 0][ex0] orienta você na instalação do Node.js e na criação da sua cópia do projeto antes de instalar o aplicativo.
 
 > [!NOTE]
-> Se você usa o Copilot Business ou o Copilot Enterprise, o administrador deve habilitar a política **Copilot CLI** para que você possa usar o aplicativo.
+> Se você usa o Copilot Business ou o Copilot Enterprise, o administrador deve manter habilitada a política **GitHub Copilot app**. Essa política é diferente da política do Copilot CLI.
 
 ## Começar
 

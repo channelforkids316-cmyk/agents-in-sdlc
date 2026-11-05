@@ -1,58 +1,50 @@
 ---
-title: "演習 1 - GitHub Copilot CLI をインストールする"
+title: "レッスン 1 - GitHub Copilot CLI のインストール"
+description: "Codespace に Copilot CLI をインストールして認証し、プロジェクトを確認して、用意されたフィルター機能の issue を見つけます。"
 authors:
   - geektrainer
-lastUpdated: 2026-06-30
+lastUpdated: 2026-09-18
 ---
 
-[GitHub Copilot CLI][about-copilot-cli] は、ターミナルで動作する強力なエージェント型コーディング アシスタントです。コードベースの探索、コード生成、コマンド実行、外部ツールとの連携をすべてコマンド ラインから行えます。タスクを任せたり、変更を依頼したりしながら、集中を保って作業できます。最初のステップは、想像どおりツールをインストールすることです。幸い、すでによく知っているツールを使って実行できます。
+[GitHub Copilot CLI][about-copilot-cli] は、ターミナルで動作する強力なエージェント型コーディングアシスタントです。コードベースを調べ、コードを生成し、コマンドを実行し、外部ツールを使えます。タスクを任せたり、変更を依頼したりできるため、コマンドラインから作業に集中できます。まずツールをインストールしましょう。使い慣れたツールで簡単にインストールできます。
 
-この演習では、次のことを学びます。
+このレッスンでは、次の内容を学習します。
 
-- npm を使って GitHub Copilot CLI をインストールする。
-- GitHub アカウントで認証する。
-- インストールを確認する。
+- npm を使って GitHub Copilot CLI をインストールします。
+- GitHub アカウントで認証します。
+- ワークショップのリポジトリを信頼し、簡単な会話を試します。
+- 組み込みの GitHub MCP サーバーを使って、フィルター機能の issue を探します。
 
 ## シナリオ
 
-チームでは、増え続けるバックログに対応するために AI agent を使い始めています。Copilot CLI はその機能をターミナルに持ち込みます。ターミナルは、多くの開発者が日常的に作業する場所です。この演習では、インストールと認証を済ませ、ワークショップの残りで使える状態にします。
-
-## Codespace でターミナルを開く
-
-Copilot CLI をインストールする前に、codespace でターミナル ウィンドウを開く必要があります。
-
-1. まだ開いていない場合は、codespace に戻ります。
-2. <kbd>Ctrl</kbd>+<kbd>\`</kbd> を押してターミナル ウィンドウを開きます。
-3. VS Code ウィンドウの下部にターミナル パネルが表示されます。
+チームでは、増え続けるバックログに対応するため AI エージェントを使い始めています。Copilot CLI は、多くの開発者が日常的に使うターミナルでエージェントの機能を利用できるようにします。このレッスンでは、インストールと認証を済ませ、ワークショップの残りで利用できる状態にします。
 
 ## Copilot CLI をインストールする
 
-Copilot CLI は [npm][install-npm]、[WinGet][install-winget]、[Homebrew][install-homebrew] でインストールできます。GitHub Codespaces には Node.js があらかじめインストールされているため、この演習では npm を使って Copilot CLI をインストールします。
+Copilot CLI は [npm][install-cli]、WinGet、Homebrew からインストールできます。GitHub Codespaces には Node.js があらかじめインストールされているため、ここでは npm を使います。
 
-1. ターミナルで、Node.js がインストールされており、バージョン要件を満たしていることを確認します。
+1. Codespace に戻り、ターミナルを開きます。
+2. Node.js がインストールされ、必要なバージョンを満たしていることを確認します。
 
    ```bash
    node --version
    ```
 
-   バージョン 22 以上（例: `v22.x.x`）が表示されるはずです。
+   バージョン 24 以上が表示されます。
 
-2. npm を使って codespace に Copilot CLI をグローバル インストールします。
+3. Copilot CLI をグローバルにインストールします。
 
    ```bash
    npm install -g @github/copilot
    ```
 
-3. バージョンを確認してインストールを検証します。
+4. インストールを確認します。
 
    ```bash
    copilot --version
    ```
 
-   バージョン番号（例: `v1.0.XX`）が表示されるはずです。
-
-> [!TIP]
-> 権限エラーが発生した場合は、一部のシステムで `sudo npm install -g @github/copilot` の使用が必要になることがあります。ただし、GitHub Codespaces では通常必要ありません。
+   バージョン番号が表示されます。
 
 ## GitHub で認証する
 
@@ -64,66 +56,85 @@ Copilot CLI は [npm][install-npm]、[WinGet][install-winget]、[Homebrew][insta
    copilot
    ```
 
-2. 現在ログインしていない場合は、認証を求めるプロンプトが表示されます。Copilot CLI は device code を表示し、URL にアクセスするよう案内します。
-3. 画面の指示に従います。
-   - 提示された URL をブラウザーで開く
-   - 求められたら device code を入力する
-   - Copilot CLI が GitHub アカウントにアクセスできるよう承認する
-4. 認証が完了すると、質問やコマンドを受け付ける Copilot CLI のプロンプトが表示されます。
+2. 認証を求められた場合は、デバイスコードの手順に従って認証し、Copilot CLI を承認します。
+3. Copilot CLI に次のプロンプトが表示されます。
+
+   ```plaintext
+   Copilot can read files in this folder and, with your permission, edit them or run code and shell commands. It will remember your permissions for the rest of this session.
+
+   Do you trust the files in this folder?
+   ```
+
+4. 表示されたパスが Tailspin Toys リポジトリであることを確認し、**Yes, and remember this folder for future sessions** を選択して「はい」と回答します。
 
 > [!NOTE]
-> Codespace では、GitHub のセッションを通じてすでに認証されている場合があります。Copilot CLI が認証を求めずに起動した場合は、そのまま進めて問題ありません。
+> Codespace では、GitHub セッションを通じてすでに認証されていることがあります。Copilot CLI が認証を求めずに起動した場合は、そのまま進めてください。
 
-## ディレクトリを信頼し、正しく動作していることを確認する
+## 操作に慣れる
 
-初めて Copilot CLI のプロンプトが表示されたので、このワークショップのリポジトリを信頼済みにし、Copilot CLI が正しくインストールされ、接続されていることを確認しましょう。
+通常のシェルプロンプトで入力したコマンドは、Codespace で直接実行されます。Copilot CLI を起動した後は、自然言語をエージェントに送り、slash command で会話を操作します。
 
-1. Copilot CLI からこのフォルダー内のファイルを信頼するか確認されたら、次の 3 つの選択肢が表示されます。
-   - **Yes, proceed**: このセッションのみ信頼する
-   - **Yes, and remember this folder for future sessions**: 永続的に信頼する
-   - **No, exit (Esc)**: ファイルへのアクセスを許可しない
-2. このワークショップでは、このリポジトリで継続して作業するため、**Yes, and remember this folder for future sessions** を選択します。
-3. Copilot に簡単な質問をして、正しく動作していることを確認します。
+1. `/model` を入力します。矢印キーで **Auto** を選択し、<kbd>Enter</kbd> を押して、もう一度 <kbd>Enter</kbd> を押して確定します。
+2. `/help` を入力して、インストールしたバージョンのコマンド一覧を確認します。<kbd>Esc</kbd> を押してヘルプ画面を閉じます。
+3. Copilot が動作することを確かめるため、簡単な質問をします。
 
-   ```
-   What files are in this project?
+   ```plaintext
+   What are the key files in this project?
    ```
 
-4. Copilot がリポジトリを探索し、プロジェクト構造の概要を返すはずです。
-5. `/help` コマンドを試して、利用可能な slash command を確認します。
+4. 回答を読み、Copilot が回答前にリポジトリを調べていることを確認します。
+5. `/mcp list` を入力して、組み込みの GitHub MCP サーバーを利用できることを確認します。
+6. Copilot にフィルター機能の issue を探すよう依頼します。
 
-   ```
-   /help
+   ```plaintext
+   Using GitHub MCP, find the issue in this repository titled "Allow users to filter games by category and publisher." Give me its URL and a short summary. Don't change anything.
    ```
 
-6. ターミナルで次のコマンドを入力して Copilot CLI を終了します。後続の演習で再び Copilot CLI に戻ります。
+7. URL を開いて issue を読みます。最初の小さな変更を終えた後、この issue を使います。
 
+> [!TIP]
+> 通常の Copilot CLI セッションは、ターミナルで現在チェックアウトしているブランチを使います。自動的に worktree は作成されません。変更を始める前に、機能ブランチを作成します。
+
+## ワークショップ用のショートカットを使う
+
+Copilot CLI は、通常、設定済みの権限の範囲外でツールを使う前に確認を求めます。このワークショップでは `--yolo` を使って再起動します。ユーザーが許可したこのショートカットにより、Codespace 内では承認のプロンプトが省略され、演習に集中できます。
+
+> [!CAUTION]
+> `--yolo` を使うと、すべてのツール、パス、URL に対する自動許可 (`--allow-all-tools`、`--allow-all-paths`、`--allow-all-urls`) が有効になります。Codespace や VM などの分離された環境でのみ使い、日常の開発で既定値として alias に設定しないでください。詳細は[ツールの使用を許可または禁止する][allow-all-warning]を参照してください。
+
+`--enable-all-github-mcp-tools` は、後のレッスンで issue や pull request を操作する際に使う、読み取りと書き込みの GitHub MCP ツールを有効にします。Codespace によってローカルコンピューターへのアクセスは制限されますが、認証済みの GitHub リソースは実際のものです。公開やマージの前に変更をレビューしてください。
+
+1. `/exit` を入力して Copilot CLI を終了します。
+2. リポジトリのルートから、次のコマンドで再起動します。
+
+   ```bash
+   copilot --yolo --enable-all-github-mcp-tools
    ```
-   exit
-   ```
+
+3. プロジェクトについて簡単な質問をして会話が動作することを確認し、`/exit` で終了します。
+
+Copilot は会話を自動的に保存します。後で指示を変更したりエージェントを追加したりしたら、`copilot --resume` を使って同じ機能会話とブランチに戻ります。
 
 ## まとめと次のステップ
 
-おめでとうございます。GitHub Copilot CLI のインストールと認証が完了しました。次のことを学びました。
+GitHub Copilot CLI をインストールして認証しました。このレッスンでは、次の内容を行いました。
 
-- npm を使って Copilot CLI をインストールする。
-- GitHub アカウントで認証する。
-- Copilot CLI が作業できるようにディレクトリを信頼する。
-- インストールが正しく動作していることを確認する。
+- npm を使って GitHub Copilot CLI をインストールしました。
+- GitHub アカウントで認証しました。
+- ワークショップのリポジトリを信頼し、簡単な会話を試しました。
+- 組み込みの GitHub MCP サーバーを使って、フィルター機能の issue を見つけました。
 
-Copilot CLI をインストールできたので、次は Copilot にプロジェクトのコンテキストを与えます。[演習 2 - Copilot CLI のカスタム命令][next-lesson] に進んでください。
+次は[最初の小さな変更に取り組み][next-lesson]、Copilot CLI を使ってゲームカードに星評価を表示します。
 
 ## リソース
 
-- [GitHub Copilot CLI のインストール][install-copilot-cli]
-- [Copilot CLI について][about-copilot-cli]
-- [Copilot CLI を使う][using-copilot-cli]
+- [GitHub Copilot CLI をインストールする][install-cli]
+- [GitHub Copilot CLI について][about-copilot-cli]
+- [Copilot CLI コマンドリファレンス][cli-reference]
 
 [previous-lesson]: ../0-prerequisites/
-[next-lesson]: ../2-custom-instructions/
-[install-copilot-cli]: https://docs.github.com/copilot/how-tos/set-up/install-copilot-cli
-[install-npm]: https://docs.github.com/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli#installing-with-npm-all-platforms
-[install-winget]: https://docs.github.com/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli#installing-with-winget-windows
-[install-homebrew]: https://docs.github.com/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli#installing-with-homebrew-macos-and-linux
+[next-lesson]: ../2-add-star-rating/
+[install-cli]: https://docs.github.com/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli
 [about-copilot-cli]: https://docs.github.com/copilot/concepts/agents/about-copilot-cli
-[using-copilot-cli]: https://docs.github.com/copilot/how-tos/use-copilot-agents/use-copilot-cli
+[cli-reference]: https://docs.github.com/copilot/reference/copilot-cli-reference/cli-command-reference
+[allow-all-warning]: https://docs.github.com/copilot/concepts/agents/about-copilot-cli#allowing-and-denying-tool-use
